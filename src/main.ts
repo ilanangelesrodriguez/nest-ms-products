@@ -1,10 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from "@nestjs/common";
+import { ValidationPipe, Logger } from "@nestjs/common";
 import { envs } from './config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const logger = new Logger('Main');
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -14,6 +15,6 @@ async function bootstrap() {
   )
 
   await app.listen(envs.PORT);
-  console.log(`Application is running on: ${envs.PORT}`);
+  logger.log(`Aplicación corriendo en el puerto: ${envs.PORT}`);
 }
 bootstrap();
