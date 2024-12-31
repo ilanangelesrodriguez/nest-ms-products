@@ -9,7 +9,11 @@ export class ProductsService extends PrismaClient implements OnModuleInit {
   private readonly logger = new Logger(ProductsService.name);
 
   create(createProductDto: CreateProductDto) {
-    return 'This action adds a new product';
+    return this.product.create(
+      {
+        data: createProductDto
+      }
+    )
   }
 
   findAll() {
