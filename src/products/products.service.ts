@@ -47,12 +47,22 @@ export class ProductsService extends PrismaClient implements OnModuleInit {
     return product;
   }
 
-  update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+  async update(id: number, updateProductDto: UpdateProductDto) {
+
+    await this.findOne(id);
+
+    return this.product.update({
+      where: { id: id.toString() },
+      data: updateProductDto,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+  async remove(id: number) {
+    await this.findOne(id);
+
+    return this.product.delete({
+      where: { id: id.toString() },
+    });
   }
 
   onModuleInit(): any {
