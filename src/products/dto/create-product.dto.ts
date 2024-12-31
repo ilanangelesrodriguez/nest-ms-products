@@ -11,4 +11,6 @@ export class CreateProductDto {
   @Min(0)
   @Type(() => Number)
   price: number;
+
+
 }
